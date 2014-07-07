@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.lanqiao.web.model.User;
 import org.lanqiao.web.service.UserService;
@@ -43,7 +44,12 @@ public class UserServlet extends HttpServlet {
         // 转发或直接输出——输出
         if (flag) {
 //                out.write("ok");
-            request.getRequestDispatcher("/pages/user/success.jsp").forward(request, response);
+            //在session中共享用户的信息
+            HttpSession session=request.getSession();
+            session.setAttribute("username", username);
+            //不仅可转发到jsp,还可以转发到servlet
+            //如果登陆成功  转发到下一个Servlet
+            request.getRequestDispatcher("/Employee").forward(request, response);
         } else {
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         }
