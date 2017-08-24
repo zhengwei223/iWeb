@@ -1,8 +1,7 @@
-<%@page import="org.lanqiao.web.model.EmployeeMapper"%>
+<%@page import="org.lanqiao.sql.ijdbc.impl.DataSourceType"%>
+<%@page import="org.lanqiao.sql.ijdbc.JdbcOperationFacade"%>
 <%@page import="org.lanqiao.web.model.Employee"%>
 <%@page import="java.util.List"%>
-<%@page import="javacommon.ijdbc.impl.JdbcUtils"%>
-<%@page import="javacommon.ijdbc.IJdbcOperation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -13,8 +12,8 @@ pageContext.setAttribute("username", "zhaoliu");
 
 request.setCharacterEncoding("utf-8");
 
-IJdbcOperation operation=JdbcUtils.getInstance();
-List<Employee> emps = operation.queryForList("SELECT * FROM employees where rownum < 10",new EmployeeMapper());
+JdbcOperationFacade operation=JdbcOperationFacade.of(DataSourceType.C3P0);
+List<Employee> emps = operation.queryForList("SELECT * FROM employees where rownum < 10",Employee.class);
 
 pageContext.setAttribute("emps", emps);
 %>

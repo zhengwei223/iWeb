@@ -1,5 +1,5 @@
-<%@page import="javacommon.ijdbc.impl.JdbcUtils"%>
-<%@page import="javacommon.ijdbc.IJdbcOperation"%>
+<%@page import="org.lanqiao.sql.ijdbc.JdbcOperationFacade"%>
+<%@page import="org.lanqiao.sql.ijdbc.impl.DataSourceType"%>
 <%@ page language="java" import="java.sql.*"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%
-		IJdbcOperation operation=JdbcUtils.getInstance();
+	JdbcOperationFacade operation=JdbcOperationFacade.of(DataSourceType.C3P0);
 		ResultSet rs = operation.queryForResultSet("SELECT * FROM jobs");
 	%>
 	<table border="1">

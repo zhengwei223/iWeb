@@ -1,8 +1,7 @@
-<%@page import="org.lanqiao.web.model.EmployeeMapper"%>
+<%@page import="org.lanqiao.sql.ijdbc.impl.DataSourceType"%>
+<%@page import="org.lanqiao.sql.ijdbc.JdbcOperationFacade"%>
 <%@page import="org.lanqiao.web.model.Employee"%>
 <%@page import="java.util.List"%>
-<%@page import="javacommon.ijdbc.impl.JdbcUtils"%>
-<%@page import="javacommon.ijdbc.IJdbcOperation"%>
 <%@ page language="java" import="java.sql.*"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
@@ -15,7 +14,7 @@
 </head>
 <body>
 	<%
-	IJdbcOperation operation=JdbcUtils.getInstance();
+	JdbcOperationFacade operation=JdbcOperationFacade.of(DataSourceType.C3P0);
 	int pageSize = 5;//每页最多行数
 	int pageNumber=1;//页码
 	if(request.getParameter("pageNumber")!=null){
@@ -29,7 +28,7 @@
 	 "where rn>?";
 	 int rowCount = operation.queryForInt("select count(*) from ("+innerSql+")");//总行数
 	int pageCount = rowCount%pageSize==0?(rowCount/pageSize):(rowCount/pageSize+1);//页数	
-	List<Employee> emps = operation.queryForList(sql,new EmployeeMapper(),pageNumber*pageSize,(pageNumber-1)*pageSize);
+	List<Employee> emps = operation.queryForList(sql,Employee.class,pageNumber*pageSize,(pageNumber-1)*pageSize);
 	pageContext.setAttribute("emps", emps);
 	pageContext.setAttribute("pageCount", pageCount);
 	pageContext.setAttribute("pageNumber", pageNumber);
