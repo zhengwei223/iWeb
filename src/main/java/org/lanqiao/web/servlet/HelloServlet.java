@@ -20,11 +20,11 @@ public class HelloServlet extends HttpServlet {
         // 没有/的时候,怎么构造路径?  contextPath+currentPath+specPath
         // 有/的时候,怎么构造路径?    serverPath+specPath
         //request.getContextPath()==/iWeb
-        String path = request.getContextPath()+"/ijdbc/selectEmployees_paging.jsp";
+        String path = request.getContextPath()+"/ijdbc/selectt_employee_paging.jsp";
         response.sendRedirect(path);
      // 没有/,怎么构造路径?       contextPath+currentPath+specPath
         // 有/的时候,怎么构造路径?    contextPath+specPath
-//        String path = "/ijdbc/selectEmployees_paging.jsp";
+//        String path = "/ijdbc/selectt_employee_paging.jsp";
 //        request.getRequestDispatcher(path).forward(request, response);
         // doPost(request, response);
     }

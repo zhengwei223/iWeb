@@ -13,7 +13,7 @@ pageContext.setAttribute("username", "zhaoliu");
 request.setCharacterEncoding("utf-8");
 
 JdbcOperationFacade operation=JdbcOperationFacade.of(DataSourceType.C3P0);
-List<Employee> emps = operation.queryForList("SELECT * FROM employees where rownum < 10",Employee.class);
+List<Employee> emps = operation.queryForList("SELECT * FROM t_employee where rownum < 10",Employee.class);
 
 pageContext.setAttribute("emps", emps);
 %>

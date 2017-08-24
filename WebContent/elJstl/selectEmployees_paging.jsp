@@ -1,3 +1,4 @@
+<%@page import="org.lanqiao.sql.ijdbc.impl.JdbcOperationFacadeImpl"%>
 <%@page import="org.lanqiao.sql.ijdbc.impl.DataSourceType"%>
 <%@page import="org.lanqiao.sql.ijdbc.JdbcOperationFacade"%>
 <%@page import="org.lanqiao.web.model.Employee"%>
@@ -13,21 +14,27 @@
 </head>
 <body>
 	<%
-	JdbcOperationFacade operation=JdbcOperationFacade.of(DataSourceType.C3P0);
+	JdbcOperationFacade operation=JdbcOperationFacadeImpl.of(DataSourceType.SIMPLE);
 	int pageSize = 5;//每页最多行数
 	int pageNumber=1;//页码
 	if(request.getParameter("pageNumber")!=null){
 	    pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
-	String innerSql = "select * from employees  order by employee_id desc";
-	String sql = "select * from "+
+	String innerSql = "select * from t_employee t1 order by id desc";
+	// oracle
+	/* String sql = "select * from "+
 	        "(select t.*,rownum rn from "+
 	                "("+innerSql+") t "+
 	         "where rownum <=?)  "+
-	 "where rn>?";
-	 int rowCount = operation.queryForInt("select count(*) from ("+innerSql+")");//总行数
+	 "where rn>?"; 
+  List<Employee> emps = operation.queryForList(sql,Employee.class,pageNumber*pageSize,(pageNumber-1)*pageSize);
+	 */
+	 int rowCount = operation.queryForInt("select count(*) from ("+innerSql+") t2");//总行数
 	int pageCount = rowCount%pageSize==0?(rowCount/pageSize):(rowCount/pageSize+1);//页数	
-	List<Employee> emps = operation.queryForList(sql,Employee.class,pageNumber*pageSize,(pageNumber-1)*pageSize);
+	 
+	 // mysql 
+	 String sql = "select * from ("+innerSql+") t2 limit ?,?";
+	 List<Employee> emps = operation.queryForList(sql,Employee.class,pageNumber,pageSize);
 	pageContext.setAttribute("emps", emps);
 	pageContext.setAttribute("pageCount", pageCount);
 	pageContext.setAttribute("pageNumber", pageNumber);
@@ -58,14 +65,14 @@
 	</c:if>
 	
 	<!-- 分页显示逻辑 -->
-	<a href="selectEmployees.jsp?pageNumber=1">首页</a>
+	<a href="selectt_employee.jsp?pageNumber=1">首页</a>
 	<c:if test="${pageNumber>1 }">
-		<a href="selectEmployees.jsp?pageNumber=${pageNumber-1 }">上一页</a>
+		<a href="selectt_employee.jsp?pageNumber=${pageNumber-1 }">上一页</a>
 	</c:if>
 	<a href="javascript:void()">${pageNumber }</a>
 	<c:if test="${pageNumber<pageCount }">
-	<a href="selectEmployees.jsp?pageNumber=${pageNumber+1 }">下一页</a>
+	<a href="selectt_employee.jsp?pageNumber=${pageNumber+1 }">下一页</a>
 	</c:if>
-	<a href="selectEmployees.jsp?pageNumber=${pageCount }">尾页</a>
+	<a href="selectt_employee.jsp?pageNumber=${pageCount }">尾页</a>
 </body>
 </html>

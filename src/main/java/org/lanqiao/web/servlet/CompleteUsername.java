@@ -25,7 +25,7 @@ public class CompleteUsername extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String username = request.getParameter("username");
 	    //查询类似的username
-	    String sql = "select last_name from employees where last_name like '"+username+"%'";
+	    String sql = "select last_name from t_employee where last_name like '"+username+"%'";
 	    JdbcOperationFacade operation = JdbcOperationFacade.of(DataSourceType.C3P0);
 	    try {
             ResultSet rs = operation.queryForResultSet(sql);

@@ -35,7 +35,7 @@ public class EmployeeServlet extends HttpServlet {
     if (request.getParameter("pageNumber") != null) {
       pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
     }
-    String innerSql = "select * from employees  order by employee_id desc";
+    String innerSql = "select * from t_employee  order by id desc";
     String sql = "select * from " + "(select t.*,rownum rn from " + "("
         + innerSql + ") t " + "where rownum <=?)  " + "where rn>?";
     int rowCount;

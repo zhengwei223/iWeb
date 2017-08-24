@@ -1,6 +1,6 @@
 package org.lanqiao.web.dao;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 
 import org.junit.Test;
@@ -11,12 +11,10 @@ public class UserDaoTest {
 
     @Test
     public void testFindByUser()  {
-        // fail("Not yet implemented");
-        // String s = null;
-        // assertNotNull(s);
-        User _user = new User("admin", "admin123");
+        User _user = new User("zhangsan", "123456");
         User user = dao.findByUser(_user);
-        assertNotNull(user.getId());
+//        System.out.println(user.getId());
+        assertThat(user.getId()).isNotNull();
     }
 
 }

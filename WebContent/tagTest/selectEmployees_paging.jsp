@@ -1,3 +1,4 @@
+<%@page import="org.lanqiao.sql.ijdbc.impl.JdbcOperationFacadeImpl"%>
 <%@page import="org.lanqiao.sql.ijdbc.impl.DataSourceType"%>
 <%@page import="org.lanqiao.sql.ijdbc.JdbcOperationFacade"%>
 <%@page import="org.lanqiao.web.model.Employee"%>
@@ -14,13 +15,13 @@
 </head>
 <body>
 	<%
-	JdbcOperationFacade operation=JdbcOperationFacade.of(DataSourceType.C3P0);
+	JdbcOperationFacade operation=JdbcOperationFacadeImpl.of(DataSourceType.C3P0);
 	int pageSize = 5;//每页最多行数
 	int pageNumber=1;//页码
 	if(request.getParameter("pageNumber")!=null){
 	    pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
-	String innerSql = "select * from employees  order by employee_id desc";
+	String innerSql = "select * from t_employee  order by id desc";
 	String sql = "select * from "+
 	        "(select t.*,rownum rn from "+
 	                "("+innerSql+") t "+
@@ -58,6 +59,6 @@
 	没有找到相关的数据!
 	</c:if>
 
-<iweb:page pageCount="${pageCount }" url="selectEmployees_paging.jsp" pageNum="${pageNumber}"></iweb:page>	
+<iweb:page pageCount="${pageCount }" url="select_employee_paging.jsp" pageNum="${pageNumber}"></iweb:page>	
 </body>
 </html>

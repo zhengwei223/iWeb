@@ -7,12 +7,12 @@
 <script type="text/javascript">
 	$(function(){
 		/* $("#btn1").click(function(){
-			$("#empList").load('/iWeb/ijdbc/selectEmployees.jsp');//请求远程url并将传回的内容全部放入所选对象之中
+			$("#empList").load('/iWeb/ijdbc/selectt_employee.jsp');//请求远程url并将传回的内容全部放入所选对象之中
 		}); */
 		//监控轮流的click事件
 		$("#btn1").toggle(
 			function(){//第一次点击,加载数据并展示
-				$("#empList").load('/iWeb/ijdbc/selectEmployees.jsp');//请求远程url并将传回的内容全部放入所选对象之中
+				$("#empList").load('/iWeb/ijdbc/selectt_employee.jsp');//请求远程url并将传回的内容全部放入所选对象之中
 				$("#empList").css('display','block');
 				$("#btn1").val('点击隐藏');
 			},

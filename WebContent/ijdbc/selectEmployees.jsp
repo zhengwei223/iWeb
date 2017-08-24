@@ -13,7 +13,7 @@
 <body>
 	<%
 	JdbcOperationFacade operation=JdbcOperationFacade.of(DataSourceType.C3P0);
-		List<Employee> emps = operation.queryForList("SELECT * FROM employees",Employee.class);
+		List<Employee> emps = operation.queryForList("SELECT * FROM t_employee",Employee.class);
 	%>
 	<table border="1">
 		<caption>人力资源系统职位信息</caption>
