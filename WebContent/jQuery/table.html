@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("table tr:even").css("background-color","#FFE4E1");//选择偶数元素,以0开始-->实际上是选择奇数行
+	$("table tr:odd").css("background-color","#DA70D6");//选择奇数元素,以1开始-->实际上是选择偶数行
+	$("table tr:even").each(function(){
+		$(this).mouseover(function(){
+			$(this).css("background-color","#191970");
+		});
+		$(this).mouseout(function(){
+			$(this).css("background-color","#FFE4E1");
+		});
+	});
+	
+	$("table tr:odd").each(function(){
+		$(this).mouseover(function(){
+			$(this).css("background-color","#48D1CC");
+		});
+		$(this).mouseout(function(){
+			$(this).css("background-color","#DA70D6");
+		});
+	});
+});
+</script>
+</head>
+<body>
+	<table width="100%%" border="1" align="center" cellpadding="10px"
+		cellspacing="10px" bordercolor="#99FFFF" >
+		<tr>
+			<td>11</td>
+			<td>12</td>
+		</tr>
+		<tr>
+			<td>21</td>
+			<td>22</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>12</td>
+		</tr>
+		<tr>
+			<td>21</td>
+			<td>22</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>12</td>
+		</tr>
+		<tr>
+			<td>21</td>
+			<td>22</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>12</td>
+		</tr>
+		<tr>
+			<td>21</td>
+			<td>22</td>
+		</tr>
+	</table>
+</body>
+</html>

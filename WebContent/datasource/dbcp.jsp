@@ -1,5 +1,5 @@
 <%@page import="java.sql.Connection"%>
-<%@page import="org.apache.commons.dbcp.*"%>
+<%@page import="org.apache.commons.dbcp2.*"%>
 <%@page import="javax.sql.DataSource"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

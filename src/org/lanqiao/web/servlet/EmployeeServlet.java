@@ -56,6 +56,8 @@ public class EmployeeServlet extends HttpServlet {
                     (pageNumber - 1) * pageSize);
             //共享给下一个组件,在下一个组件中可以getAttribute("emps"),或者用el表达式 ${requestScope.emps}
             request.setAttribute("emps", emps);
+            request.setAttribute("pageNumber", pageNumber);
+            request.setAttribute("pageCount", pageCount);
             request.getRequestDispatcher("/pages/Employee/list.jsp").forward(request, response);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
