@@ -1,17 +1,12 @@
 package org.lanqiao.web.crud.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.lanqiao.sql.ijdbc.JdbcOperationFacade;
-import org.lanqiao.sql.ijdbc.RowMapper;
 import org.lanqiao.sql.ijdbc.impl.DataSourceType;
 import org.lanqiao.web.crud.entity.User;
 import org.lanqiao.web.crud.entity.UserMapper;
 import org.lanqiao.web.crud.queryModel.UserQuery;
-
-import com.sun.org.apache.bcel.internal.generic.Select;
 
 public enum UserDAO {
   me;
