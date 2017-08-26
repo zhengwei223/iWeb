@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户列表</title>
+<link rel="stylesheet" href="/iWeb/static/css/layui.css">
+</head>
+<body>
+	<form class="layui-form" >
+		<!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">年龄范围</label>
+			<div class="layui-input-block">
+				<select name="ageScope" lay-filter="aihao">
+				  <option value="-1">~请选择~</option>
+					<option value="1">0~20</option>
+					<option value="2">20~40</option>
+					<option value="3">40~60</option>
+					<option value="4">60~80</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">下拉选择框</label>
+			<div class="layui-input-block">
+				<select name="salaryScope" lay-filter="aihao">
+					<option value="-1">~请选择~</option>
+					<option value="1">0~2000</option>
+          <option value="2">2000~5000</option>
+          <option value="3">5000~8000</option>
+          <option value="4">8000~10000</option>
+          <option value="5">10000~</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</form>
+	<table id="userTable">	</table>
+	<script src="/iWeb/static/layui.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		layui.use([ 'table','form','jquery' ], function(table,form,$) {
+			/* 初始化表格 */
+			  var userTable = table.render(
+					  {
+						  elem: '#userTable',  // 原始的table元素
+						  height:500, 
+						  url:'./userData.json', // 异步数据的地址 
+						  page:true,  // 是否分页
+						  id:'userTable',
+					    cols:[[{field:'id', width:80, sort: true,title:'ID'},
+					           {field:'name', width:80,title:'姓名'},
+					           {field:'age', width:80,title:'年龄'},
+					           {field:'email', width:80,title:'邮箱'},
+					           {field:'birth', width:177,title:'生日'},
+					           {field:'salary', width:80, sort: true,title:'工资'},
+					           {field:'active', width:80, sort: true,title:'激活'}
+					           ]]
+					  });
+			 
+			  /* 监听表单的提交事件
+			  data里面有表单的所有数据，访问方式为data.field.表单域的名字
+			  */
+			  form.on('submit(*)',function(data){
+				  /* 重新加载数据 */
+				  userTable.reload({
+						  where:{ageScope: data.field.ageScope,salaryScope:data.field.salaryScope}
+						});
+				  // 终止提交
+				  return false;
+			  });
+		});
+	</script>
+
+</body>
+</html>

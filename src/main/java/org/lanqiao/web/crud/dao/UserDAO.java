@@ -47,4 +47,12 @@ public enum UserDAO {
         + " limit ?,?";
     return op.queryForList(query, new UserMapper(), (page-1)*limit, limit);
   }
+
+  public void update(User user) {
+    // TODO Auto-generated method stub
+    String sql = "update crud_user set name=?,email=? where id=?";
+    op.execute(sql, user.getName(),user.getEmail(),user.getId());
+  }
+  
+  
 }
