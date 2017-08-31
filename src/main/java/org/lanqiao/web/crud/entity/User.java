@@ -33,6 +33,8 @@ public class User {
   private Boolean active;
   private Integer roleId;
 
+
+
   public Integer getId() {
     return id;
   }
@@ -128,6 +130,7 @@ public class User {
   public void setRoleId(Integer roleId) {
     this.roleId = roleId;
   }
+
 
   @Override
   public String toString() {

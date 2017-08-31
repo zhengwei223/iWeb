@@ -1,3 +1,4 @@
+-- servlet和jsp示例需要的表结构和数据
 DROP TABLE IF EXISTS t_employee;
 CREATE TABLE t_employee(
   id INT PRIMARY KEY AUTO_INCREMENT,
