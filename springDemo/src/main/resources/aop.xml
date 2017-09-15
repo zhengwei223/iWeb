@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<!--
+
+  &lt;!&ndash;切面组合&ndash;&gt;
+  <bean class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor" id="advisor1">
+    <property name="advice" ref="advice1"/>
+  &lt;!&ndash;这里不是正则表达式而是简单的通配&ndash;&gt;
+    <property name="mappedName" value="*Biz"/>
+  </bean>
+
+  <bean id="regexpAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+  <property name="advice" ref="advice1"/>
+  <property name="pointcut">
+    <bean class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+      <property name="pattern" value=".*Biz.*" />
+    </bean>
+  </property>
+</bean>
+
+
+  &lt;!&ndash;声明代理&ndash;&gt;
+  <bean class="org.springframework.aop.framework.ProxyFactoryBean" id="someBizProxy">
+    &lt;!&ndash;指定接口&ndash;&gt;
+    <property name="proxyInterfaces" value="org.lanqiao.springDemo.aop.SomeBiz"/>
+    &lt;!&ndash;指定实现类&ndash;&gt;
+    <property name="target" ref="someBiz"/>
+    &lt;!&ndash;拦截器名字&ndash;&gt;
+    <property name="interceptorNames">
+      <list>
+        <value>regexpAdvisor</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    &lt;!&ndash;拦截器名字&ndash;&gt;
+    <property name="interceptorNames">
+      <list>
+        <value>regexpAdvisor</value>
+      </list>
+    </property>
+    &lt;!&ndash;bean的名字可以用通配符&ndash;&gt;
+    <property name="beanNames" value="*Biz"/>
+  </bean>-->
+
+  <!--通知-->
+  <bean id="advice1" class="org.lanqiao.springDemo.aop.Advice1" />
+  <!--业务bean-->
+  <bean id="someBiz" class="org.lanqiao.springDemo.aop.SomeBizImpl"/>
+
+  <bean id="aspectAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+    <property name="advice" ref="advice1"/>
+    <!--切入点表达式-->
+    <property name="expression" value="execution( * org.lanqiao.springDemo..*Biz*.*Biz(..))" />
+  </bean>
+  <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+</beans>

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!--加载location指定的属性文件，这样在xml的其他地方可以用${属性名}的方式来获得属性文件中的值-->
+  <context:property-placeholder location="jdbc.properties"/>
 
   <bean id="serviceA" class="org.lanqiao.springDemo.beans.ServiceA" >
       <!--属性注入或者setter注入-->
@@ -18,10 +23,10 @@
   </bean>
 
   <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-    <property name="url" value="jdbc:mysql://10.100.40.185:3306/test"/>
-    <property name="username" value="lemoncs"/>
-    <property name="password" value="lemoncs"/>
+    <property name="driverClassName" value="${driver}"/>
+    <property name="url" value="${url}"/>
+    <property name="username" value="${name}"/>
+    <property name="password" value="${pwd}"/>
   </bean>
 
 </beans>

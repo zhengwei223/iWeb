@@ -34,5 +34,6 @@ public class ApplicationContextDemo {
 
     DataSource dataSource = (DataSource) applicationContext.getBean("dataSource");
     System.out.println(dataSource);
+    
   }
 }
