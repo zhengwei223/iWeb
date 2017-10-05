@@ -29,11 +29,14 @@ public class ApplicationContextDemo {
       else
         System.out.println(s);
     }
+    System.out.println("============");
     ServiceA serviceA = (ServiceA) applicationContext.getBean("serviceA");
     serviceA.func1();
 
-    DataSource dataSource = (DataSource) applicationContext.getBean("dataSource");
-    System.out.println(dataSource);
-    
+   //  DataSource dataSource = (DataSource) applicationContext.getBean("dataSource");
+   //  System.out.println(dataSource);
+   //
+   // String hi_zh =  applicationContext.getMessage("hi",null,new Locale("zh","CN"));
+   //  System.out.println(hi_zh);
   }
 }
