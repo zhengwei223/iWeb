@@ -22,18 +22,18 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <property name="basename" value="message"/>
   </bean>
 
-  <!--<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">-->
-    <!--<property name="driverClassName" value="${driver}"/>-->
-    <!--<property name="url" value="${url}"/>-->
-    <!--<property name="username" value="${name}"/>-->
-    <!--<property name="password" value="${pwd}"/>-->
-  <!--</bean>-->
+  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <property name="driverClassName" value="${driver}"/>
+    <property name="url" value="${url}"/>
+    <property name="username" value="${name}"/>
+    <property name="password" value="${pwd}"/>
+  </bean>
 
 
   <!--<bean id="connection" class="org.lanqiao.springDemo.beans.ConnectionFactoryBean">-->
     <!--<property name="dataSource" ref="dataSource"/>-->
   <!--</bean>-->
 
-  <bean class="org.lanqiao.springDemo.applicationContext.MyBeanPostProcessor"/>
+  <bean class="org.lanqiao.springDemo.applicationContext.TimingBeanPostProcessor"/>
 
 </beans>

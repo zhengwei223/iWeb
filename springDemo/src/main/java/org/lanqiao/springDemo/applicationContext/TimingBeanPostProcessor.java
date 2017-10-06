@@ -6,8 +6,10 @@ import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.cglib.proxy.*;
 
 import java.lang.reflect.Method;
-
-public class MyBeanPostProcessor implements BeanPostProcessor {
+/**
+ * BeanPostProcessor案例
+ * */
+public class TimingBeanPostProcessor implements BeanPostProcessor {
 
   public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
     Class beanClass = bean.getClass();
